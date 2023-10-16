@@ -20,6 +20,5 @@
 	</dependencies>
 	<properties>
 		<java.version>1.8</java.version>
-		<log4j.version>1.2.17</log4j.version>
 	</properties>
 </project>
