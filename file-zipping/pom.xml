@@ -8,8 +8,8 @@
 	<packaging>jar</packaging>
 	<parent>
 		<groupId>com.medium.agrawalniket</groupId>
-		<artifactId>parent-java-8</artifactId>
+		<artifactId>parent-java-17</artifactId>
 		<version>1.0.0-SNAPSHOT</version>
-		<relativePath>../parent-java-8</relativePath>
+		<relativePath>../parent-java-17</relativePath>
 	</parent>
 </project>

@@ -11,7 +11,15 @@
 	<packaging>pom</packaging>
 	<name>parent-java-8</name>
 	<description>Parent for All modules based on Java 8</description>
+	<dependencies>
+		<dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>${log4j.version}</version>
+        </dependency>
+	</dependencies>
 	<properties>
 		<java.version>1.8</java.version>
+		<log4j.version>1.2.17</log4j.version>
 	</properties>
 </project>
