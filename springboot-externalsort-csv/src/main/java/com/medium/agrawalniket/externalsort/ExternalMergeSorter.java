@@ -26,8 +26,11 @@ public class ExternalMergeSorter {
 
     StopWatch stopwatch = StopWatch.createStarted();
     try {
+      logger.info("Starting External Merge Sort for : {}", inputFile);
       String outputFile = inputFile.split(".csv")[0].concat("_Sorted.csv");
       Files.deleteIfExists(Paths.get(outputFile));
+      Files.createDirectories(Paths.get(tempFileFolder));
+
       Comparator<CSVRecord> comparator =
           Comparator.comparing(op -> op.get(0).concat("|").concat(op.get(1)));
 
@@ -37,16 +40,15 @@ public class ExternalMergeSorter {
                   .numHeader(1).skipHeader(false).format(CSVFormat.DEFAULT).build();
 
       ArrayList<CSVRecord> header = Lists.newArrayList();
-
-      Files.createDirectories(Paths.get(tempFileFolder));
       List<File> sortInBatch = CsvExternalSort.sortInBatch(new File(inputFile),
           new File(tempFileFolder), sortOptions, header);
       CsvExternalSort.mergeSortedFiles(sortInBatch, new File(outputFile), sortOptions, true,
           header);
+   
     } catch (IOException | ClassNotFoundException e) {
-      logger.error("Error while merge sort operation");
+      logger.error("Error while External Merge Sort operation");
     }
-    logger.info("Total Time consumed for External Sorting : {} seconds.",
+    logger.info("Total Time consumed for External Merge Sort : {} seconds.",
         stopwatch.getTime(TimeUnit.SECONDS));
   }
 }
