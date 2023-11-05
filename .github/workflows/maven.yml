@@ -1,5 +1,5 @@
 ---
-name: Java CI with Maven
+name: Java Spring Boot CI with Maven
 on:
   push:
     branches:
@@ -20,5 +20,5 @@ jobs:
           cache: maven
       - name: Build with Maven
         run: mvn -B -DskipTests clean package
-      - name: Build with Maven
+      - name: Maven Test
         run: mvn test
