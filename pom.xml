@@ -150,5 +150,6 @@
 		<module>springboot-blocking-queue</module>
 		<module>java-object-comparator</module>
 		<module>springboot-externalsort-csv</module>
+		<module>springboot-memory-logger</module>
 	</modules>
 </project>
