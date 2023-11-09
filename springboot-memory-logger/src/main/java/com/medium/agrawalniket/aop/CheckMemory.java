@@ -9,7 +9,7 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface CheckMemory {
 
-  long maxThresholdMemory() default 0;
+  long minRequiredMemory() default 0;
 
   MemoryUnit jvmMemoryUnit() default MemoryUnit.MB;
 

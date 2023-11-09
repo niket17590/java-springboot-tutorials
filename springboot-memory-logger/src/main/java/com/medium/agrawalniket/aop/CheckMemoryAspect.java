@@ -17,20 +17,26 @@ public class CheckMemoryAspect {
 
   @Before("@annotation(checkMemory)")
   public void executionTimeLogger(JoinPoint joinPoint, CheckMemory checkMemory) {
-    long freeMemory = getFreeMemory(checkMemory.jvmMemoryUnit());
-    long thresholdMemory = checkMemory.maxThresholdMemory();
-    if (thresholdMemory != 0 && thresholdMemory > freeMemory) {
+    long maxAvailableMemory = getMaxAvailableMemory(checkMemory.jvmMemoryUnit());
+    long minRequiredMemory = checkMemory.minRequiredMemory();
+    if (minRequiredMemory != 0 && minRequiredMemory > maxAvailableMemory) {
       logger.warn("Checking JVM memory before calling method: {}", joinPoint.getSignature());
-      logger.warn("Free memory in JVM is {}{} and it is lower than defined threshold memory: {}{} ",
-          freeMemory, checkMemory.jvmMemoryUnit(), thresholdMemory, checkMemory.jvmMemoryUnit());
+      logger.warn(
+          "Max free memory in JVM is {}{} and it is lower than defined threshold memory: {}{} ",
+          maxAvailableMemory, checkMemory.jvmMemoryUnit(), minRequiredMemory,
+          checkMemory.jvmMemoryUnit());
       // Raise Email Alert
       // Raise Exception
       throw new LowMemoryException("JVM Memory is Low hence suspending operation");
     }
   }
 
-  private long getFreeMemory(MemoryUnit memoryUnit) {
-    return getMemory(Runtime.getRuntime().freeMemory(), memoryUnit);
+  private long getMaxAvailableMemory(MemoryUnit memoryUnit) {
+    long maxFreeMemory = getMemory(Runtime.getRuntime().maxMemory(), memoryUnit);
+    long usedMemory = getMemory(
+        Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory(), memoryUnit);
+    logger.info("Max JVM Memory: {} and Current Used JVM Memory: {}", maxFreeMemory, usedMemory);
+    return (maxFreeMemory - usedMemory);
   }
 
   private long getMemory(long memorySize, MemoryUnit memoryUnit) {
