@@ -35,5 +35,7 @@
 
 	<modules>
 		<module>spring-cloud-config-server</module>
+		<module>producer-service</module>
+		<module>consumer-service</module>
 	</modules>
 </project>
