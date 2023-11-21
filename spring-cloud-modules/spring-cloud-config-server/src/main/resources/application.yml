@@ -2,7 +2,7 @@ server:
   port: 8888
 spring:
   application:
-    name: spring-cloud-config-server
+    name: CLOUD-CONFIG-SERVER
   cloud:
     config:
       server:
@@ -10,3 +10,8 @@ spring:
           uri: https://github.com/niket17590/cloud-config-repo.git
           search-paths: '{application}'
           default-label: master
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,refresh
