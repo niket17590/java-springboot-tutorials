@@ -1,19 +1,30 @@
 package com.medium.agrawalniket.consumer.controller;
 
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
+import com.medium.agrawalniket.consumer.feign.ConsumerFeignClient;
 
 @RestController
-@RequestMapping("/consumer")
 public class ConsumerServiceController {
 
-  @Value("${consumer.greeting}")
-  private String greeting;
-  
-  @GetMapping("getGreeting")
-  public String getGreeting() {
-    return this.greeting;
+  @Autowired
+  RestTemplate restTemplate;
+
+  @Autowired
+  ConsumerFeignClient feignClient;
+
+  @GetMapping("getGreeting/{userName}")
+  public String getGreeting(@PathVariable("userName") String userName) {
+    return restTemplate.getForEntity("http://PRODUCER-SERVICE/producer/getGreeting/{userName}",
+        String.class, userName).getBody();
+  }
+
+  @GetMapping("getFeignGreeting/{userName}")
+  public String getFeignGreeting(@PathVariable("userName") String userName) {
+    return feignClient.getGreeting(userName);
+
   }
 }

@@ -30,7 +30,7 @@
 		</dependency>
 	</dependencies>
 	<properties>
-		<spring-cloud.version>2022.0.3</spring-cloud.version>
+		<spring-cloud.version>2023.0.0-RC1</spring-cloud.version>
 	</properties>
 
 	<modules>
@@ -38,5 +38,6 @@
 		<module>producer-service</module>
 		<module>consumer-service</module>
 		<module>spring-cloud-config-client</module>
+		<module>spring-cloud-eureka-server</module>
 	</modules>
 </project>

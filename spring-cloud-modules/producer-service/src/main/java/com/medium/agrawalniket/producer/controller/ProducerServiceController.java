@@ -1,7 +1,7 @@
 package com.medium.agrawalniket.producer.controller;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -9,11 +9,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/producer")
 public class ProducerServiceController {
 
-  @Value("${producer.greeting}")
-  private String greeting;
-  
-  @GetMapping("getGreeting")
-  public String getGreeting() {
-    return this.greeting;
+  @GetMapping("getGreeting/{userName}")
+  public String getGreeting(@PathVariable("userName") String userName) {
+    
+    return "Greeting sent from Producer for "+userName;
   }
 }
