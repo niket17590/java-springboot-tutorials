@@ -152,5 +152,6 @@
 		<module>springboot-externalsort-csv</module>
 		<module>springboot-memory-logger</module>
 		<module>spring-cloud-modules</module>
+		<module>spring-boot-h2</module>
 	</modules>
 </project>
