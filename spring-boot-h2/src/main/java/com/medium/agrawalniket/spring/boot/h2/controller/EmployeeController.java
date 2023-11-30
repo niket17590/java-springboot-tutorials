@@ -12,7 +12,7 @@ import com.medium.agrawalniket.spring.boot.h2.entity.Employee;
 import com.medium.agrawalniket.spring.boot.h2.repository.EmployeeRepository;
 
 @RestController
-public class UserController {
+public class EmployeeController {
   @Autowired
   private EmployeeRepository employeeRepository;
 
